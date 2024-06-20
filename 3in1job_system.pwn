@@ -1,14 +1,9 @@
 // Posao stolar, drvosjeca i dostavljac namjestaja
 // twoblqck.art, 17/5/2024
 
-
-// napravit koordinate da su sve u 1 varijabli 
-// static const Float:tramvaj_pozicije[11][5] =
-// {
-
 #include < a_samp >
 #include < streamer >
-#include < Pawn.CMD>
+#include < Pawn.CMD >
 
 // Varijable
 new dostavljacn_vozila[9], 
