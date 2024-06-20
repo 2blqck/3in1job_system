@@ -28,6 +28,13 @@ new dostavljacn_vozila[9],
 	stolar_checkpoint[MAX_PLAYERS],
 	stolar_objekt[MAX_PLAYERS],
 	stolar_timer[MAX_PLAYERS],
+	lakirer_checkpoint[MAX_PLAYERS],
+	lakirer_timer[MAX_PLAYERS],
+	lakirer_progres[MAX_PLAYERS],
+	lakirer_objekt[MAX_PLAYERS],
+	farba_masina[MAX_PLAYERS],
+	farba_progres[MAX_PLAYERS],
+	rand_id[MAX_PLAYERS],
 	bool:kanta_farbe[MAX_PLAYERS] = false;
 
 //
@@ -175,9 +182,13 @@ public OnFilterScriptInit()
 	Create3DTextLabel("Farba i temeljna boja\n\
 					  {FFFFFF}Da uzmete farbu kucajte\n/kantafarbe", 0xFF2200FF, 958.6893, 2111.9355, 1011.0303, 25,0,1);
 
-	CreatePickup(3082, 1, 944.1709, 2157.9043, 1011.0234); // Ostavljanje farbe i temeljne boje
+	CreatePickup(3082, 1, 940.9603, 2132.9004, 1011.0234); // Ostavljanje farbe i temeljne boje
 	Create3DTextLabel("Farba i temeljna boja\n\
-					  {FFFFFF}Da ubacite farbu u masinu kucajte\n/kantafarbe", 0xFF2200FF, 944.1709, 2157.9043, 1011.0234, 25,0,1);
+					  {FFFFFF}Da ubacite farbu u masinu stisnite\nN", 0xFF2200FF, 940.9603, 2132.9004, 1011.0234, 25,0,1);
+
+	CreatePickup(3082, 1, 940.8111, 2158.2249, 1011.0234); // Ostavljanje farbe i temeljne boje
+	Create3DTextLabel("Farba i temeljna boja\n\
+					  {FFFFFF}Da ubacite farbu u masinu stisnite\nN", 0xFF2200FF, 940.8111, 2158.2249, 1011.0234, 25,0,1);
 
 	// Skladiste
 	CreatePickup(2680, 1, 954.9236, 2172.0149, 1011.0234); // Ostavljanje drvene kutije
@@ -199,7 +210,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
     // Test komanda za teleportaciju do posla, nije obavezna za rad skripte
     if(!strcmp(cmdtext, "/testkomanda", true))
     {
-        SetPlayerPos(playerid, 2529.2551, -1295.1881, 1048.2891+1), SetPlayerInterior(playerid, 2);
+        SetPlayerPos(playerid, 961.0235, 2099.5051, 1011.0248+1), SetPlayerInterior(playerid, 1), posao_id[playerid] = 3;
         return 1;     
     }
     return 0;
@@ -222,6 +233,10 @@ public OnPlayerConnect(playerid)
 	dostava_checkpoint[playerid] = 0;
 	dostava_progres[playerid] = 0;
 	stolar_checkpoint[playerid] = 0;
+	lakirer_checkpoint[playerid] = 0;
+	lakirer_progres[playerid] = 0;
+	farba_masina[playerid] = 0;
+	farba_progres[playerid] = 0;
 	return 1;
 }
 
@@ -341,19 +356,46 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
     if(newkeys & KEY_NO)
     {
     	// Ostavljanje namjestaja u skladiste
-    	if(IsPlayerInRangeOfPoint(playerid, 2, 954.9236, 2172.0149, 1011.0234)) // Ostavljanje drvene kutije
+    	if(IsPlayerInRangeOfPoint(playerid, 2, 954.9236, 2172.0149, 1011.0234) && lakirer_checkpoint[playerid] == 8) // Ostavljanje drvene kutije
     	{
-
+    		SendClientMessage(playerid, -1, "Zavrsili ste posao i zaradili $1000.");
+	    	SkiniAttachment(playerid);
+	    	OcistiAnimaciju(playerid);
+	    	GivePlayerMoney(playerid, 1000);
+	    	DisablePlayerCheckpoint(playerid);
+	    	lakirer_checkpoint[playerid] = 0;
+	    	lakirer_progres[playerid] = 0;
+	    	kanta_farbe[playerid] = false;
+    		farba_masina[playerid] = 0;
+    		farba_progres[playerid] = 0;
     	}
 
-    	if(IsPlayerInRangeOfPoint(playerid, 2, 963.8871, 2171.9973, 1011.0234)) // Ostavljanje ormarica
+    	if(IsPlayerInRangeOfPoint(playerid, 2, 963.8871, 2171.9973, 1011.0234) && lakirer_checkpoint[playerid] == 8) // Ostavljanje ormarica
     	{
-    		
+    		SendClientMessage(playerid, -1, "Zavrsili ste posao i zaradili $1000.");
+	    	SkiniAttachment(playerid);
+	    	OcistiAnimaciju(playerid);
+	    	GivePlayerMoney(playerid, 1000);
+	    	DisablePlayerCheckpoint(playerid);
+	    	lakirer_checkpoint[playerid] = 0;
+	    	lakirer_progres[playerid] = 0;
+	    	kanta_farbe[playerid] = false;
+    		farba_masina[playerid] = 0;
+    		farba_progres[playerid] = 0;
     	}
 
-    	if(IsPlayerInRangeOfPoint(playerid, 2, 959.0905, 2154.9238, 1011.0234)) // Ostavljanje stolica
+    	if(IsPlayerInRangeOfPoint(playerid, 2, 959.0905, 2154.9238, 1011.0234) && lakirer_checkpoint[playerid] == 8) // Ostavljanje stolica
 		{
-			
+			SendClientMessage(playerid, -1, "Zavrsili ste posao i zaradili $1000.");
+	    	SkiniAttachment(playerid);
+	    	OcistiAnimaciju(playerid);
+	    	GivePlayerMoney(playerid, 1000);
+	    	DisablePlayerCheckpoint(playerid);
+	    	lakirer_checkpoint[playerid] = 0;
+	    	lakirer_progres[playerid] = 0;
+	    	kanta_farbe[playerid] = false;
+    		farba_masina[playerid] = 0;
+    		farba_progres[playerid] = 0;
     	}
 
     	// Drvosjeca ostavljanje drveta u prikolicu tipkom 'N'
@@ -415,6 +457,32 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	    		}
 	    		else RandomNamjestaj(playerid);
 	    	}
+    	}
+
+    	if(farba_masina[playerid] < 2 && GetPlayerInterior(playerid) == 1 && kanta_farbe[playerid] == true)
+    	{
+    		if(IsPlayerInRangeOfPoint(playerid, 3, 940.9603, 2132.9004, 1011.0234))
+    		{
+    			if(farba_progres[playerid] == 1) return SendClientMessage(playerid, -1, "Vec ste ubacili u ovu masinu, sada morate u drugu.");
+    			SendClientMessage(playerid, -1, "Ubacili ste farbu u masinu.");
+    			SendClientMessage(playerid, -1, "Sada idite ubacite u drugu masinu.");
+    			SkiniAttachment(playerid);
+	    		OcistiAnimaciju(playerid);
+    			kanta_farbe[playerid] = false;
+    			farba_progres[playerid] = 1;
+    			farba_masina[playerid]++;
+    		}
+    		else if(IsPlayerInRangeOfPoint(playerid, 3, 940.8111, 2158.2249, 1011.0234))
+    		{
+    			if(farba_progres[playerid] == 2) return SendClientMessage(playerid, -1, "Vec ste ubacili u ovu masinu, sada morate u drugu.");
+    			SendClientMessage(playerid, -1, "Ubacili ste farbu u masinu.");
+    			SendClientMessage(playerid, -1, "Sada mozete poceti raditi. (/pokreniposao)");
+    			SkiniAttachment(playerid);
+	    		OcistiAnimaciju(playerid);
+    			kanta_farbe[playerid] = false;
+    			farba_progres[playerid] = 2;
+    			farba_masina[playerid]++;
+    		}
     	}
     }
     return 1;
@@ -617,8 +685,10 @@ public OnPlayerEnterCheckpoint(playerid)
 			}
 		}
 	}
+
 	if(posao_oprema[playerid] == 1)
 	{
+		// Checkpointi za stolara
 		if(stolar_checkpoint[playerid] == 1 && GetPlayerInterior(playerid) == 2)
 		{
 			SendClientMessage(playerid, -1, "Uzeli ste drva sa stola, sada ih stavite na pokretnu traku.");
@@ -666,7 +736,7 @@ public OnPlayerEnterCheckpoint(playerid)
 
 		else if(stolar_checkpoint[playerid] == 5 && GetPlayerInterior(playerid) == 2)
 		{
-			SendClientMessage(playerid, -1, "Uzeli ste kutiju, sada ga odnesite dalje.");
+			SendClientMessage(playerid, -1, "Uzeli ste kutiju, sada ju odnesite dalje.");
 			SetPlayerAttachedObject(playerid, 4, 2328, 5, 0.351000, -0.187000, 1.249999, -83.900016, 0.000000, 11.099997, 1.000000, 1.000000, 1.000000); // Kutija drvena za stolara
 			DestroyPlayerObject(playerid, stolar_objekt[playerid]);
 			ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.1, 1, 1, 1, 1, 1);
@@ -740,7 +810,208 @@ public OnPlayerEnterCheckpoint(playerid)
 			GivePlayerMoney(playerid, 500);
 			stolar_checkpoint[playerid] = 0;
 		}
-	}
+
+		// Checkpointi za lakirera
+		if(lakirer_checkpoint[playerid] == 1)
+		{
+			new rand = random(3);
+			SkiniAttachment(playerid);
+			switch(rand)
+			{
+				case 0:
+				{
+					SendClientMessage(playerid, -1, "Uzeli ste ormaric, odnesite ga do masine za finu obradu.");
+					SetPlayerAttachedObject(playerid, 5, 912, 5, 0.092999, 0.317999, 0.215000, -83.800018, 0.000000, 92.299987, 0.755999, 0.695999, 0.623999); // Ormaric
+					lakirer_progres[playerid] = 1;
+				}
+				case 1:
+				{
+					SendClientMessage(playerid, -1, "Uzeli ste stolic, odnesite ga do masine za finu obradu.");
+					SetPlayerAttachedObject(playerid, 6, 1820, 5, -0.260000, -0.479999, 0.637000, -82.000015, 6.100000, 0.000000, 1.000000, 1.000000, 1.000000); // Stolic za lakirera
+					lakirer_progres[playerid] = 2;
+				}
+				case 2: 
+				{
+					SendClientMessage(playerid, -1, "Uzeli ste kutiju, odnesite ju do masine za finu obradu.");
+					SetPlayerAttachedObject(playerid, 4, 2328, 5, 0.351000, -0.187000, 1.249999, -83.900016, 0.000000, 11.099997, 1.000000, 1.000000, 1.000000); // Kutija drvena
+					lakirer_progres[playerid] = 3;
+				}
+			}
+			SetPlayerCheckpoint(playerid, 942.4181, 2117.6594, 1011.0303, 1.5);
+			TogglePlayerControllable(playerid, 1);
+			ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.1, 1, 1, 1, 1, 1);
+			loop_animacija[playerid] = 2;
+			lakirer_checkpoint[playerid] = 2;
+		}
+		else if(lakirer_checkpoint[playerid] == 2)
+		{
+			switch(lakirer_progres[playerid])
+			{
+				case 1:
+				{
+					lakirer_objekt[playerid] = CreatePlayerObject(playerid, 912, 942.363037, 2118.678955, 1011.713317, 0.000000, 0.000000, -88.600006); // Pocetak fine obrade ormaric
+					MovePlayerObject(playerid, lakirer_objekt[playerid], 941.935058, 2136.206787, 1011.713317, 0.75, 0.000000, 0.000000, -88.600006);
+				}
+				case 2:
+				{
+					lakirer_objekt[playerid] = CreatePlayerObject(playerid, 1820, 941.950805, 2118.395019, 1011.143188, 0.000000, 0.000000, 0.000000); // Pocetak fine obrade stolic
+					MovePlayerObject(playerid, lakirer_objekt[playerid], 941.950805, 2135.869140, 1011.143188, 0.75, 0.000000, 0.000000, 0.000000);
+				}
+				case 3:
+				{
+					lakirer_objekt[playerid] = CreatePlayerObject(playerid, 2328, 942.390991, 2117.724121, 1011.140380, 0.000000, 0.000000, 0.000000); // Pocetak fine obrade kutija
+					MovePlayerObject(playerid, lakirer_objekt[playerid], 942.390991, 2135.324218, 1011.140380, 0.75, 0.000000, 0.000000, 0.000000);
+				}
+			}
+			DisablePlayerCheckpoint(playerid);
+			SendClientMessage(playerid, -1, "Sacekajte da se namjestaj obradi na masini.");
+			SkiniAttachment(playerid);
+			OcistiAnimaciju(playerid);
+			lakirer_timer[playerid] = SetTimerEx("LakirerCheckpoint", 21000, false, "ii", playerid, 1);
+		}
+		else if(lakirer_checkpoint[playerid] == 3 && IsPlayerObjectMoving(playerid, lakirer_objekt[playerid]) == 0)
+		{
+			SendClientMessage(playerid, -1, "Uzeli ste namjestaj iz masine, odnesite ga na farbanje temeljnom bojom.");
+			DestroyPlayerObject(playerid, lakirer_objekt[playerid]);
+			switch(lakirer_progres[playerid])
+			{
+				case 1:
+					SetPlayerAttachedObject(playerid, 5, 912, 5, 0.092999, 0.317999, 0.215000, -83.800018, 0.000000, 92.299987, 0.755999, 0.695999, 0.623999); // Ormaric
+				case 2:
+					SetPlayerAttachedObject(playerid, 6, 1820, 5, -0.260000, -0.479999, 0.637000, -82.000015, 6.100000, 0.000000, 1.000000, 1.000000, 1.000000); // Stolic za lakirera
+				case 3:
+					SetPlayerAttachedObject(playerid, 4, 2328, 5, 0.351000, -0.187000, 1.249999, -83.900016, 0.000000, 11.099997, 1.000000, 1.000000, 1.000000); // Kutija drvena
+			}
+			SetPlayerCheckpoint(playerid, 942.3478, 2153.7080, 1011.0234, 1.5);
+			ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.1, 1, 1, 1, 1, 1);
+			loop_animacija[playerid] = 2;
+			lakirer_checkpoint[playerid] = 4;
+		}
+		else if(lakirer_checkpoint[playerid] == 4)
+		{
+			switch(lakirer_progres[playerid])
+			{
+				case 1:
+				{
+					lakirer_objekt[playerid] = CreatePlayerObject(playerid, 912, 942.097412, 2154.557617, 1011.713317, 0.000000, 0.000000, -88.600006); // Pocetak temeljne boje ormaric
+					MovePlayerObject(playerid, lakirer_objekt[playerid], 942.188171, 2172.158935, 1011.713317, 0.75, 0.000000, 0.000000, -88.600006);
+				}
+				case 2:
+				{
+					lakirer_objekt[playerid] = CreatePlayerObject(playerid, 1820, 941.950805, 2154.221923, 1011.143188, 0.000000, 0.000000, 0.000000); // Pocetak temeljne boje stolic
+					MovePlayerObject(playerid, lakirer_objekt[playerid], 941.950805, 2171.775146, 1011.143188, 0.75, 0.000000, 0.000000, 0.000000);
+				}
+				case 3:
+				{
+					lakirer_objekt[playerid] = CreatePlayerObject(playerid, 2328, 942.390991, 2153.537841, 1011.140380, 0.000000, 0.000000, 0.000000); // Pocetak temeljne boje kutija
+					MovePlayerObject(playerid, lakirer_objekt[playerid], 942.390991, 2171.231201, 1011.140380, 0.75, 0.000000, 0.000000, 0.000000);
+				}
+			}
+			DisablePlayerCheckpoint(playerid);
+			SkiniAttachment(playerid);
+			OcistiAnimaciju(playerid);
+			lakirer_timer[playerid] = SetTimerEx("LakirerCheckpoint", 15000, false, "ii", playerid, 2);
+		}
+		else if(lakirer_checkpoint[playerid] == 5 && IsPlayerObjectMoving(playerid, lakirer_objekt[playerid]) == 0)
+		{
+			SendClientMessage(playerid, -1, "Uzeli ste namjestaj iz masine, odnesite ga na farbanje konacnom bojom.");
+			DestroyPlayerObject(playerid, lakirer_objekt[playerid]);
+			switch(lakirer_progres[playerid])
+			{
+				case 1:
+					SetPlayerAttachedObject(playerid, 5, 912, 5, 0.092999, 0.317999, 0.215000, -83.800018, 0.000000, 92.299987, 0.755999, 0.695999, 0.623999, 0xFFF3FF8A); // Ormaric
+				case 2:
+					SetPlayerAttachedObject(playerid, 6, 1820, 5, -0.260000, -0.479999, 0.637000, -82.000015, 6.100000, 0.000000, 1.000000, 1.000000, 1.000000, 0xFFF3FF8A); // Stolic za lakirera
+				case 3:
+					SetPlayerAttachedObject(playerid, 4, 2328, 5, 0.351000, -0.187000, 1.249999, -83.900016, 0.000000, 11.099997, 1.000000, 1.000000, 1.000000, 0xFFF3FF8A); // Kutija drvena
+			}
+			SetPlayerCheckpoint(playerid, 942.4181, 2117.6594, 1011.0303, 1.5);
+			ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.1, 1, 1, 1, 1, 1);
+			loop_animacija[playerid] = 2;
+			lakirer_checkpoint[playerid] = 6;
+		}
+		else if(lakirer_checkpoint[playerid] == 6)
+		{
+			switch(lakirer_progres[playerid])
+			{
+				case 1:
+				{
+					lakirer_objekt[playerid] = CreatePlayerObject(playerid, 912, 942.363037, 2118.678955, 1011.713317, 0.000000, 0.000000, -88.600006); // Pocetak farbanja ormaric
+					MovePlayerObject(playerid, lakirer_objekt[playerid], 941.935058, 2136.206787, 1011.713317, 0.75, 0.000000, 0.000000, -88.600006);
+				}
+				case 2:
+				{
+					lakirer_objekt[playerid] = CreatePlayerObject(playerid, 1820, 941.950805, 2118.395019, 1011.143188, 0.000000, 0.000000, 0.000000); // Pocetak farbanja stolic
+					MovePlayerObject(playerid, lakirer_objekt[playerid], 941.950805, 2135.869140, 1011.143188, 0.75, 0.000000, 0.000000, 0.000000);
+				}
+				case 3:
+				{
+					lakirer_objekt[playerid] = CreatePlayerObject(playerid, 2328, 942.390991, 2117.724121, 1011.140380, 0.000000, 0.000000, 0.000000); // Pocetak farbanja kutija
+					MovePlayerObject(playerid, lakirer_objekt[playerid], 942.390991, 2135.324218, 1011.140380, 0.75, 0.000000, 0.000000, 0.000000);
+				}
+			}
+			SetPlayerObjectMaterial(playerid, lakirer_objekt[playerid], 0, 10765, "airportgnd_sfse", "white", 0xFFFFFFFF);
+			DisablePlayerCheckpoint(playerid);
+			SendClientMessage(playerid, -1, "Sacekajte da se namjestaj ofarba na masini.");
+			SkiniAttachment(playerid);
+			OcistiAnimaciju(playerid);
+			lakirer_timer[playerid] = SetTimerEx("LakirerCheckpoint", 21000, false, "ii", playerid, 3);
+		}
+		else if(lakirer_checkpoint[playerid] == 7 && IsPlayerObjectMoving(playerid, lakirer_objekt[playerid]) == 0)
+		{
+			SendClientMessage(playerid, -1, "Uzeli ste namjestaj iz masine, odnesite ga u skladiste.");
+			DestroyPlayerObject(playerid, lakirer_objekt[playerid]);
+			switch(rand_id[playerid])
+			{
+				case 0:
+				{
+					#define BOJA 0xFFFF5733
+				}
+				case 1:
+				{
+					#undef BOJA
+					#define BOJA 0xFF82ED0B
+				}
+				case 2:
+				{
+					#undef BOJA
+					#define BOJA 0xFF0BCFED
+				}
+				case 3:
+				{
+					#undef BOJA
+					#define BOJA 0xFF0B14ED
+				}
+				case 4:
+				{
+					#undef BOJA
+					#define BOJA 0xFFED0BEB
+				}
+			}
+
+			switch(lakirer_progres[playerid])
+			{
+				case 1:
+				{
+					SetPlayerAttachedObject(playerid, 5, 912, 5, 0.092999, 0.317999, 0.215000, -83.800018, 0.000000, 92.299987, 0.755999, 0.695999, 0.623999, BOJA);
+					SetPlayerCheckpoint(playerid, 963.8871, 2171.9973, 1011.0234, 1.5); // Ormaric
+				}
+				case 2:
+				{
+					SetPlayerAttachedObject(playerid, 6, 1820, 5, -0.260000, -0.479999, 0.637000, -82.000015, 6.100000, 0.000000, 1.000000, 1.000000, 1.000000, BOJA);
+					SetPlayerCheckpoint(playerid, 959.0905, 2154.9238, 1011.0234, 1.5); // Stolic za lakirera
+				}
+				case 3:
+				{
+					SetPlayerAttachedObject(playerid, 4, 2328, 5, 0.351000, -0.187000, 1.249999, -83.900016, 0.000000, 11.099997, 1.000000, 1.000000, 1.000000, BOJA); 
+					SetPlayerCheckpoint(playerid, 954.9236, 2172.0149, 1011.0234, 1.5); // Kutija drvena
+				}
+			}
+			ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.1, 1, 1, 1, 1, 1);
+			loop_animacija[playerid] = 2;
+			lakirer_checkpoint[playerid] = 8;
+		}
+	}	
 	return 1;
 }
 
@@ -891,13 +1162,25 @@ CMD:pokreniposao(playerid)
 		RandomNamjestaj(playerid);
 	}
 	// Stolar / Lakirer
-	else if(posao_id[playerid] == 3 && posao_oprema[playerid] == 1)
+	else if(posao_id[playerid] == 3 && posao_oprema[playerid] == 1 && GetPlayerSkin(playerid) == 16 && GetPlayerInterior(playerid) == 2)
 	{
 		SendClientMessage(playerid, -1, "Pokrenuli ste posao, uzmite drva i stavite ih na pokretnu traku za obradu.");
 		SetPlayerCheckpoint(playerid, 2559.1699, -1287.2177, 1044.1250, 1.5);
 		stolar_checkpoint[playerid] = 1;
 	}
-	else return SendClientMessage(playerid, -1, "Nisi zaposljen");
+	else if(posao_id[playerid] == 3 && posao_oprema[playerid] == 1 && GetPlayerSkin(playerid) == 144 && GetPlayerInterior(playerid) == 1)
+	{
+		if(farba_masina[playerid] < 2) return SendClientMessage(playerid, -1, "Prvo morate ubaciti farbu u masine");
+		SendClientMessage(playerid, -1, "Pokrenuli ste posao, uzmite namjestaj i stavite ga u masinu.");
+		SetPlayerCheckpoint(playerid, 948.5063, 2104.7615, 1011.0234, 1.5);
+		lakirer_checkpoint[playerid] = 1;
+	}
+	else if(GetPlayerInterior(playerid) == 1 && GetPlayerSkin(playerid) != 144)
+	{
+		SendClientMessage(playerid, -1, "Moras uzeti opremu od posla lakirer.");
+		SetPlayerCheckpoint(playerid, 961.0235, 2099.5051, 1011.0248, 1.5);
+	}
+	else return SendClientMessage(playerid, -1, "Nisi zaposljen ili nemas opremu.");
 	return 1;
 }
 
@@ -915,15 +1198,7 @@ CMD:kantafarbe(playerid)
 		loop_animacija[playerid] = 2;
 		kanta_farbe[playerid] = true;
 	}
-	else if(IsPlayerInRangeOfPoint(playerid, 5, 944.1709, 2157.9043, 1011.0234)) // Ostavljanje farbe
-	{
-		if(posao_id[playerid] != 3) return SendClientMessage(playerid, -1, "Nisi zapoljen kao stolar / lakirer.");
-		if(kanta_farbe[playerid] == false) return SendClientMessage(playerid, -1, "Nemate kantu farbe kod sebe.");
-		SendClientMessage(playerid, -1, "Uspjesno ste ubacili kantu farbe u masinu.");
-		OcistiAnimaciju(playerid);
-		kanta_farbe[playerid] = false;
-	}
-	else SendClientMessage(playerid, -1, "Nisi na mjestu za uzimanje/ostavljanje farbe.");
+	else SendClientMessage(playerid, -1, "Nisi na mjestu za uzimanje farbe.");
 	return 1;
 }
 
@@ -938,7 +1213,7 @@ CMD:komandeposla(playerid)
 	SendClientMessage(playerid, -1, "Lakirer - /kantafarbe - Uzimanje farbe za ubacivanje u masinu.");
 
 	SendClientMessage(playerid, -1, "Uopsteno - 'F' Ulazak/izlazak iz prostorije");
-	SendClientMessage(playerid, -1, "Uopsteno - 'N' Uzimanje/ostavljanje namjestaja/drva");
+	SendClientMessage(playerid, -1, "Uopsteno - 'N' Uzimanje/ostavljanje namjestaja/drva/farbe");
 	return 1;
 }
 
@@ -1088,6 +1363,63 @@ public StolarObjekti(playerid, id)
 			ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.1, 1, 1, 1, 1, 1);
 			loop_animacija[playerid] = 2;
 			stolar_checkpoint[playerid] = 11;
+		}
+	}
+    return 1;
+}
+
+forward LakirerCheckpoint(playerid, id);
+public LakirerCheckpoint(playerid, id)
+{
+	TogglePlayerControllable(playerid, 1);
+	KillTimer(zalediodledi_timer[playerid]);
+	switch(id)
+	{
+		case 1: 
+		{
+			SetPlayerCheckpoint(playerid, 942.4745, 2137.2949, 1011.0234, 1.5);
+			lakirer_checkpoint[playerid] = 3;
+		}
+		case 2: 
+		{
+			SetPlayerObjectMaterial(playerid, lakirer_objekt[playerid], 0, 10765, "airportgnd_sfse", "white", 0xFFFFFFFF);
+			SetPlayerCheckpoint(playerid, 942.2686, 2173.3093, 1011.0234, 1.5);
+			lakirer_checkpoint[playerid] = 5;
+		}
+		case 3: 
+		{
+			rand_id[playerid] = random(5);
+			switch(rand_id[playerid])
+			{
+				case 0:
+				{
+					#undef BOJA
+					#define BOJA 0xFFFF5733
+				}
+				case 1:
+				{
+					#undef BOJA
+					#define BOJA 0xFF82ED0B
+				}
+				case 2:
+				{
+					#undef BOJA
+					#define BOJA 0xFF0BCFED
+				}
+				case 3:
+				{
+					#undef BOJA
+					#define BOJA 0xFF0B14ED
+				}
+				case 4:
+				{
+					#undef BOJA
+					#define BOJA 0xFFED0BEB
+				}
+			}
+			SetPlayerObjectMaterial(playerid, lakirer_objekt[playerid], 0, 10765, "airportgnd_sfse", "white", BOJA);
+			SetPlayerCheckpoint(playerid, 942.4745, 2137.2949, 1011.0234, 1.5);
+			lakirer_checkpoint[playerid] = 7;
 		}
 	}
     return 1;
