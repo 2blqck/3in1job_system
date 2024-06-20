@@ -1,5 +1,5 @@
 # 3in1job_system
-3 in 1 job system, twoblqck.art (13/6/24)<br>
+3 in 1 job system, twoblqck.art (17/6/24)<br>
 Vrijeme izrade: cc. 12-15h <br><br>
 Potrebno: <a href="https://github.com/katursis/Pawn.CMD/releases/tag/3.4.0">Pawn.CMD</a>
 &
