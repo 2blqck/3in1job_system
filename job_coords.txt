@@ -1,0 +1,158 @@
+// Enterijer - 2536.53, -1294.84, 1044.12 id:2 // Za posao stolara
+// Enterijer - 963.05, 2159.75, 1011.03 id:1 // Za posao lakirera
+
+// Vanjska zgrada fabrike
+// -1971.7169, -2431.4812, 30.6250 - Ulaz u fabriku za preradu drveta u namjestaj
+// -2002.1569, -2409.1113, 30.6250 - Ulaz u skladiste 
+
+// Drvosjeca:
+// skin: 27
+// -1640.7117, -2233.1650, 31.4766 - Zaposljavanje
+// -1639.1935, -2245.8394, 31.4766 - Oprema
+// -1947.0997, -2439.6750, 30.6250 - Ostavljanje izrezanog nepreradenog drveta
+// 2559.1699, -1287.2177, 1044.125 - Ostavljanje sirovih komada drva -> nakon dovlacenja do izvan fabrike,  unosi u fabriku i ostavlja na mjesto
+// -1638.5691, -2202.0093, 32.0088 - Pozicija rezanja velikog drveta 1
+// -1586.0774, -2197.6597, 18.1648 - Pozicija rezanja velikog drveta 2
+// -1610.0093, -2259.2915, 29.7057 - Pozicija rezanja velikog drveta 3
+// -1640.6987, -2274.0383, 35.8217 - Pozicija rezanja velikog drveta 4
+
+// Dostavljac namjestaja:
+// Skin: 170
+// -2052.4968, -2455.0635, 30.6250 - Zaposljavanje
+// -2048.7520, -2457.6887, 30.6250 - Oprema
+
+// Fabrika za preradu drveta u daske i namjestaj - id:2
+// Skin: 16
+// 2531.6917, -1282.0725, 1048.2891 - Ulaz u prostoriju za zaposljavanje i opremu
+// 2530.1389, -1305.7330, 1048.2891 - Izlaz iz mjesta za zaposljavanje i opremu
+// 2570.4397, -1301.6830, 1044.1250 - Izlaz iz fabrike
+// 2524.0593, -1294.8953, 1048.2891 - Oprema
+// 2529.2551, -1295.1881, 1048.2891 - Zaposljavanje
+// 2560.4814, -1291.6953, 1044.1250 - Ostavljanje drveta za preradu u daske -> mora prvo uzeti drva sa stola
+// 2551.8367, -1291.7209, 1044.1250 - Kupljenje dasaka poslije prerade
+// 2551.7605, -1294.9249, 1044.1250 - Ostavljanje dasaka za preradu u namjestaj
+// 2560.2773, -1294.9209, 1044.1250 - Kupljenje zavrsenog namjestaja
+// 2551.1084, -1299.8948, 1044.1250 - Obicna obrada namjestaja
+// 2532.8152, -1305.3618, 1044.1250 - Mjesto za ostavljanje namjestaja poslije obicne obrade namjestaja
+
+// Fabrika za finu obradu namjestaja i lakirnica - id:1
+// Skin: 144
+// 2536.4954, -1281.110, 1044.125 - Ulaz u lakirnicu
+// 932.9949, 2129.7490, 1011.0234 - Izlaz iz lakirnice
+// 948.5063, 2104.7615, 1011.0234 - Uzimanje namjstaja za pocetak fine obrade
+// 942.4181, 2117.6594, 1011.0303 - Ostavljanje namjestaja za finu obradu
+// 942.4745, 2137.2949, 1011.0234 - Uzimanje namjestaja poslije fine obrade
+// 942.3478, 2153.7080, 1011.0234 - Ostavljanje namjestaja za farbanje temeljnom bojom
+// 942.2686, 2173.3093, 1011.0234 - Uzimanje namjestaja poslije farbanja temljnom bojom
+// 954.9236, 2172.0149, 1011.0234 - Ostavljanje kutije drvene u skladistu
+// 963.8871, 2171.9973, 1011.0234 - Ostavljanje ormarica u skladistu
+// 959.0905, 2154.9238, 1011.0234 - Ostavljanje stolica u skladistu
+// 964.9330, 2160.0876, 1011.0303 - Izlaz iz skladista
+// 961.0235, 2099.5051, 1011.0248 - Oprema lakirnice
+// 958.6893, 2111.9355, 1011.0303 - Uzimanje farbe i temeljne boje
+// 944.1709, 2157.9043, 1011.0234 - Ubacivanje farbe i temeljne boje u masinu
+
+/* 
+SetPlayerAttachedObject(playerid, 1, 3799, 5, 0.000000, -0.092999, 0.155999, -82.300003, 0.000000, 9.800003, 0.180999, 0.200999, 0.195999); // Kutija za dostavljac namjestaja
+SetPlayerAttachedObject(playerid, 2, 19793, 5, 0.000000, 0.056999, 0.198999, 0.000000, 98.599998, 6.999996, 1.404999, 1.000000, 1.000000); // Drvo za stolara + drvosjecu
+SetPlayerAttachedObject(playerid, 3, 2410, 5, 0.000000, 0.033000, 0.068000, -82.499938, 5.000000, -72.999984, 0.601999, 0.771000, 1.000000); // Daska za stolara
+SetPlayerAttachedObject(playerid, 4, 2328, 5, 0.351000, -0.187000, 1.249999, -83.900016, 0.000000, 11.099997, 1.000000, 1.000000, 1.000000); // Kutija drvena za stolara
+SetPlayerAttachedObject(playerid, 5, 912, 5, 0.092999, 0.317999, 0.215000, -83.800018, 0.000000, 92.299987, 0.755999, 0.695999, 0.623999); // Ormaric za stolara
+SetPlayerAttachedObject(playerid, 6, 1820, 5, -0.260000, -0.479999, 0.637000, -82.000015, 6.100000, 0.000000, 1.000000, 1.000000, 1.000000); // Stolic za lakirera
+SetPlayerAttachedObject(playerid, 3, 2636, 5, 0.000000, 0.239000, 0.070000, -170.800094, -18.799995, 83.599929, 1.000000, 1.000000, 1.000000) // Stolica za stolara
+SetPlayerAttachedObject(playerid, 8, 3082, 5, 0.000000, 0.000000, 0.115000, 7.199998, 14.099990, 0.000000, 1.000000, 1.000000, 0.539000) // Kanta farbe
+*/ 
+
+/*
+AddStaticVehicle(605, -1642.9668, -2223.2527, 30.8408, 98.0672, 0, 0); // Drvosjeca vozilo 1
+AddStaticVehicle(605, -1642.1703, -2229.1877, 29.7708, 96.0169, 0, 0); // Drvosjeca vozilo 2
+AddStaticVehicle(605, -1640.2982, -2251.5884, 31.3141, 92.8015, 0, 0); // Drvosjeca vozilo 3
+AddStaticVehicle(605, -1646.3102, -2264.0283, 32.9103, 69.2222, 0, 0); // Drvosjeca vozilo 4
+AddStaticVehicle(605, -1651.3549, -2271.0986, 35.1469, 50.1358, 0, 0); // Drvosjeca vozilo 5
+*/
+
+/*
+AddStaticVehicle(440, -1980.1071, -2435.8025, 30.7793, 133.3542, 0, 0); // Dostavljac namjestaja vozilo 1
+AddStaticVehicle(440, -1983.9734, -2431.3098, 30.7401, 132.4013, 0, 0); // Dostavljac namjestaja vozilo 2
+AddStaticVehicle(440, -1986.7517, -2428.0413, 30.7360, 130.3959, 0, 0); // Dostavljac namjestaja vozilo 3
+AddStaticVehicle(440, -1992.2051, -2423.1599, 30.7464, 134.5331, 0, 0); // Dostavljac namjestaja vozilo 4
+AddStaticVehicle(440, -1996.0574, -2418.6758, 30.7354, 137.2275, 0, 0); // Dostavljac namjestaja vozilo 5
+AddStaticVehicle(440, -2033.7366, -2383.2073, 30.7300, 130.7572, 0, 0); // Dostavljac namjestaja vozilo 6
+AddStaticVehicle(440, -2038.9432, -2378.1821, 30.7403, 132.3708, 0, 0); // Dostavljac namjestaja vozilo 7
+AddStaticVehicle(440, -2056.4761, -2448.5027, 30.7438, 237.0809, 0, 0); // Dostavljac namjestaja vozilo 8
+AddStaticVehicle(440, -2051.1587, -2441.6929, 30.7513, 233.2193, 0, 0); // Dostavljac namjestaja vozilo 9
+*/
+
+/*
+// Dostavljac oprema
+CreateDynamicObject(2007, -2048.925048, -2458.376708, 29.695001, 0.000000, 0.000000, 140.199920, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(11729, -2049.791992, -2458.097412, 29.574998, 0.000000, 0.000000, 142.900009, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(11729, -2050.350341, -2457.675537, 29.574998, 0.000000, 0.000000, 142.900009, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(11729, -2050.900146, -2457.260009, 29.574998, 0.000000, 0.000000, 142.900009, -1, -1, -1, 300.00, 300.00); 
+
+// Fabrika stolar ulaz za lakirnicu
+CreateDynamicObject(19860, 2535.527587, -1283.144042, 1044.375366, 0.000000, 0.000000, 89.399925, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(19860, 2535.569091, -1280.163574, 1044.374023, 0.000000, -0.000000, -91.100036, -1, -1, -1, 300.00, 300.00);
+
+// Fabrika stolar ostavljanje namjestaja
+CreateDynamicObject(2636, 2534.580566, -1305.525024, 1043.734985, 0.000000, 0.000000, -138.799987, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2636, 2533.818603, -1305.354003, 1043.734985, 0.000000, 0.000000, -88.699996, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2636, 2533.719970, -1305.242431, 1043.542358, 176.499969, 0.000000, 179.500061, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2636, 2532.905029, -1305.950439, 1043.488159, -84.700065, 76.499992, 179.500061, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2096, 2534.449707, -1305.003051, 1043.125000, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2307, 2533.562011, -1305.492309, 1043.125000, 0.000000, 0.000000, 156.600051, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2636, 2531.721923, -1304.966552, 1043.700073, 4.599923, 42.299999, -164.599990, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2307, 2532.811767, -1303.930297, 1043.125000, 0.000000, 0.000000, 93.899993, -1, -1, -1, 300.00, 300.00); 
+
+// Fabrika stolar drva na stolu
+CreateDynamicObject(1463, 2558.986328, -1286.260620, 1044.405151, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+
+// Fabrika stolar pocetak i kraj drveta -> dasku
+CreateDynamicObject(19793, 2559.371337, -1291.931640, 1044.174682, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(19793, 2553.029052, -1291.931640, 1044.174682, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2410, 2553.423339, -1291.902343, 1044.105468, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00);  // Drvo u dasku
+
+// Fabrika stolar pocetak i kraj daske u namjestaj
+CreateDynamicObject(2410, 2553.423339, -1294.894409, 1044.105468, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2410, 2559.314697, -1294.894409, 1044.105468, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2636, 2559.365478, -1295.017456, 1044.715332, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolica zavrsena
+CreateDynamicObject(2328, 2559.337402, -1296.210937, 1044.065673, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija zavrsena
+CreateDynamicObject(912, 2559.239501, -1295.080688, 1044.614868, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Ormaric zavrsen
+CreateDynamicObject(2636, 2551.114501, -1300.927001, 1044.715332, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolica obrada
+CreateDynamicObject(2328, 2550.804443, -1299.819091, 1044.065673, 0.000000, 0.000000, -167.500061, -1, -1, -1, 300.00, 300.00); // Kutija obrada
+CreateDynamicObject(912, 2551.080078, -1300.951049, 1044.614868, 0.000000, 0.000000, -176.800018, -1, -1, -1, 300.00, 300.00);  // Ormaric obrada
+
+// Lakirnica uzimanje namjestaja
+CreateDynamicObject(2636, 949.709655, 2104.541748, 1010.639770, 0.000000, 0.000000, -60.900001, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2636, 949.063537, 2104.674072, 1010.639770, 0.000000, 0.000000, -94.800003, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2636, 948.432739, 2104.214355, 1010.639770, 0.000000, 0.000000, 39.499992, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2636, 947.759277, 2104.039794, 1010.639770, 0.000000, 0.000000, -8.600005, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2636, 947.639465, 2104.177978, 1010.518432, 0.000000, -177.199981, -58.399997, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2088, 949.307800, 2104.915771, 1010.223449, 0.000000, 0.000000, -169.299987, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2328, 948.060180, 2105.882324, 1010.023437, 0.000000, 0.000000, 129.399993, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2328, 947.657653, 2106.326416, 1010.743835, 0.000000, 0.000000, 157.899993, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(2328, 947.729614, 2106.008300, 1011.483703, 0.000000, 0.000000, 145.299972, -1, -1, -1, 300.00, 300.00); 
+
+// Lakirnica 4 pozicije
+CreateDynamicObject(2328, 942.390991, 2117.724121, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija pocetak primer
+CreateDynamicObject(2328, 942.390991, 2135.324218, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija kraj primer
+CreateDynamicObject(2328, 942.390991, 2153.537841, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija pocetak farba
+CreateDynamicObject(2328, 942.390991, 2171.231201, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija kraj farba
+
+CreateDynamicObject(912, 942.363037, 2118.678955, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric pocetak primer
+CreateDynamicObject(912, 941.935058, 2136.206787, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric kraj primer
+CreateDynamicObject(912, 942.097412, 2154.557617, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric pocetak farba
+CreateDynamicObject(912, 942.188171, 2172.158935, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric kraj farba
+
+CreateDynamicObject(1820, 941.950805, 2118.395019, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic pocetak primer
+CreateDynamicObject(1820, 941.950805, 2135.869140, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic kraj primer
+CreateDynamicObject(1820, 941.950805, 2154.221923, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic pocetak farba
+CreateDynamicObject(1820, 941.950805, 2171.775146, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic kraj farba
+
+// Drvosjeca drva
+CreateDynamicObject(845, -1630.149658, -2197.912841, 29.842027, 18.499994, -0.800000, -173.799972, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(845, -1575.610839, -2191.321777, 15.144578, 18.499994, -0.800000, -173.799972, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(845, -1608.284057, -2253.232421, 28.833259, 18.499994, 3.599999, -126.299934, -1, -1, -1, 300.00, 300.00); 
+CreateDynamicObject(845, -1639.286621, -2268.586181, 34.361213, 18.499994, -3.500000, -126.299934, -1, -1, -1, 300.00, 300.00); 
+
+*/
