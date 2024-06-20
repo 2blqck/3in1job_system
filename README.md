@@ -8,7 +8,7 @@ Potrebno: <a href="https://github.com/katursis/Pawn.CMD/releases/tag/3.4.0">Pawn
 Drvosjeca: https://youtu.be/pojF9xfXK9c <br>
 Dostavljac namjestaja: https://youtu.be/C5DXtYmoYYU <br>
 Stolar: https://youtu.be/9IL5yxwS3tE <br>
-Lakirer: // <br>
+Lakirer: https://youtu.be/w4t-FO9zEp8 <br>
 <br>
 Komande:
 ```
