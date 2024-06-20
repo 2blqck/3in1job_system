@@ -40,8 +40,8 @@
 // 2536.4954, -1281.110, 1044.125 - Ulaz u lakirnicu
 // 932.9949, 2129.7490, 1011.0234 - Izlaz iz lakirnice
 // 948.5063, 2104.7615, 1011.0234 - Uzimanje namjstaja za pocetak fine obrade
-// 942.4181, 2117.6594, 1011.0303 - Ostavljanje namjestaja za finu obradu
-// 942.4745, 2137.2949, 1011.0234 - Uzimanje namjestaja poslije fine obrade
+// 942.4181, 2117.6594, 1011.0303 - Ostavljanje namjestaja za finu obradu / farbanje bojom
+// 942.4745, 2137.2949, 1011.0234 - Uzimanje namjestaja poslije fine obrade / farbanje bojom
 // 942.3478, 2153.7080, 1011.0234 - Ostavljanje namjestaja za farbanje temeljnom bojom
 // 942.2686, 2173.3093, 1011.0234 - Uzimanje namjestaja poslije farbanja temljnom bojom
 // 954.9236, 2172.0149, 1011.0234 - Ostavljanje kutije drvene u skladistu
@@ -50,7 +50,8 @@
 // 964.9330, 2160.0876, 1011.0303 - Izlaz iz skladista
 // 961.0235, 2099.5051, 1011.0248 - Oprema lakirnice
 // 958.6893, 2111.9355, 1011.0303 - Uzimanje farbe i temeljne boje
-// 944.1709, 2157.9043, 1011.0234 - Ubacivanje farbe i temeljne boje u masinu
+// 940.9603, 2132.9004, 1011.0234 - Ubacivanje farbe i temeljne boje u masinu
+// 940.8111, 2158.2249, 1011.0234 - Ubacivanje farbe i temeljne boje u masinu
 
 /* 
 SetPlayerAttachedObject(playerid, 1, 3799, 5, 0.000000, -0.092999, 0.155999, -82.300003, 0.000000, 9.800003, 0.180999, 0.200999, 0.195999); // Kutija za dostavljac namjestaja
@@ -134,24 +135,25 @@ CreateDynamicObject(2328, 947.657653, 2106.326416, 1010.743835, 0.000000, 0.0000
 CreateDynamicObject(2328, 947.729614, 2106.008300, 1011.483703, 0.000000, 0.000000, 145.299972, -1, -1, -1, 300.00, 300.00); 
 
 // Lakirnica 4 pozicije
-CreateDynamicObject(2328, 942.390991, 2117.724121, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija pocetak primer
-CreateDynamicObject(2328, 942.390991, 2135.324218, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija kraj primer
-CreateDynamicObject(2328, 942.390991, 2153.537841, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija pocetak farba
-CreateDynamicObject(2328, 942.390991, 2171.231201, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija kraj farba
+CreateDynamicObject(912, 942.363037, 2118.678955, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric pocetak fine obrade / farbanja
+CreateDynamicObject(912, 941.935058, 2136.206787, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric kraj fine obrade / farbanja
+CreateDynamicObject(912, 942.097412, 2154.557617, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric pocetak temeljna boja
+CreateDynamicObject(912, 942.188171, 2172.158935, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric kraj temeljna boja
 
-CreateDynamicObject(912, 942.363037, 2118.678955, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric pocetak primer
-CreateDynamicObject(912, 941.935058, 2136.206787, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric kraj primer
-CreateDynamicObject(912, 942.097412, 2154.557617, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric pocetak farba
-CreateDynamicObject(912, 942.188171, 2172.158935, 1011.713317, 0.000000, 0.000000, -88.600006, -1, -1, -1, 300.00, 300.00); // Ormaric kraj farba
+CreateDynamicObject(1820, 941.950805, 2118.395019, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic pocetak fine obrade / farbanja
+CreateDynamicObject(1820, 941.950805, 2135.869140, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic kraj fine obrade / farbanja
+CreateDynamicObject(1820, 941.950805, 2154.221923, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic pocetak temeljna boja
+CreateDynamicObject(1820, 941.950805, 2171.775146, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic kraj temeljna boja
 
-CreateDynamicObject(1820, 941.950805, 2118.395019, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic pocetak primer
-CreateDynamicObject(1820, 941.950805, 2135.869140, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic kraj primer
-CreateDynamicObject(1820, 941.950805, 2154.221923, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic pocetak farba
-CreateDynamicObject(1820, 941.950805, 2171.775146, 1011.143188, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Stolic kraj farba
+CreateDynamicObject(2328, 942.390991, 2117.724121, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija pocetak fine obrade / farbanja
+CreateDynamicObject(2328, 942.390991, 2135.324218, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija kraj fine obrade / farbanja
+CreateDynamicObject(2328, 942.390991, 2153.537841, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija pocetak temeljna boja
+CreateDynamicObject(2328, 942.390991, 2171.231201, 1011.140380, 0.000000, 0.000000, 0.000000, -1, -1, -1, 300.00, 300.00); // Kutija kraj temeljna boja
 
 // Drvosjeca drva
 CreateDynamicObject(845, -1630.149658, -2197.912841, 29.842027, 18.499994, -0.800000, -173.799972, -1, -1, -1, 300.00, 300.00); 
 CreateDynamicObject(845, -1575.610839, -2191.321777, 15.144578, 18.499994, -0.800000, -173.799972, -1, -1, -1, 300.00, 300.00); 
 CreateDynamicObject(845, -1608.284057, -2253.232421, 28.833259, 18.499994, 3.599999, -126.299934, -1, -1, -1, 300.00, 300.00); 
 CreateDynamicObject(845, -1639.286621, -2268.586181, 34.361213, 18.499994, -3.500000, -126.299934, -1, -1, -1, 300.00, 300.00); 
+
 */
