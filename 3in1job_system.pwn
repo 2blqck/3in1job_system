@@ -15,7 +15,7 @@
 #include < a_samp >
 #include < streamer >
 #include < Pawn.CMD >
-
+ 
 // Varijable
 new dostavljacn_vozila[9], 
 	drvosjeca_vozila[5],
