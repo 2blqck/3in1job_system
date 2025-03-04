@@ -229,6 +229,11 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
 public OnPlayerConnect(playerid)
 {
+	// Fix za postavljanje animacije igracu od prvi put
+	ApplyAnimation(playerid, "CARRY", "null", 0.0, 0, 0, 0, 0, 0);
+	ApplyAnimation(playerid, "CHAINSAW", "null", 0.0, 0, 0, 0, 0, 0);
+	ApplyAnimation(playerid, "BOX", "null", 0.0, 0, 0, 0, 0, 0);
+
 	// Resetovanje varijabli pri konektovanju igraca
 	loop_animacija[playerid] = 0;
 	posao_id[playerid] = 0;
@@ -1066,10 +1071,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 public OnPlayerSpawn(playerid)
 {
-	// Fix za postavljanje animacije igracu od prvi put
-	ApplyAnimation(playerid, "CARRY", "crry_prtial", 0.1, 1, 1, 1, 1, 1);
-	ApplyAnimation(playerid, "CHAINSAW", "CSAW_1", 0.1, 1, 1, 1, 1, 1, 1);
-	ApplyAnimation(playerid, "BOX", "boxhipin", 0.1, 1, 1, 1, 1, 1);
 	loop_animacija[playerid] = 0;
 	return 1;
 }
